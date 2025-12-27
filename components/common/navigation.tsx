@@ -15,7 +15,8 @@ const Navigation = () => {
     // { id: "/blog", label: "Blog", icon: BookOpen },
     // { id: "/roadmap", label: "Roadmap", icon: MapPin },
     { id: "/contribute", label: "Contribute", icon: Users },
-    { id: "/docs", label: "Docs", icon: Book },
+    // { id: "/docs", label: "Docs", icon: Book },
+    // { id: "/team", label: "Team", icon: Target },
     { id: "/about", label: "About Us", icon: Info },
   ];
 
@@ -84,7 +85,7 @@ const Navigation = () => {
                         : {}
                     }
                   >
-                    <Icon className="w-4 h-4" />
+                    {/* <Icon className="w-4 h-4" /> */}
                     {item.label}
                   </button>
                 </Link>
