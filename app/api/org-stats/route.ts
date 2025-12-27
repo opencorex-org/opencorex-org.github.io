@@ -1,23 +1,23 @@
 import { NextResponse } from "next/server";
 
+export const revalidate = 300; // 5 minutes ISR for static export
+
 const ORG = "opencorex-org";
 const GITHUB_API = "https://api.github.com";
 
 async function ghFetch(path: string) {
   const headers: Record<string, string> = { Accept: "application/vnd.github+json" };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-  const res = await fetch(`${GITHUB_API}${path}`, { headers, next: { revalidate: 300 } });
+  const res = await fetch(`${GITHUB_API}${path}`, { headers });
   if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${res.statusText}`);
   return res.json();
 }
 
 export async function GET() {
   try {
-    // Public members
-    const members = await ghFetch(`/orgs/${ORG}/members`);
+    const members = await ghFetch(`/orgs/${ORG}/members?per_page=100`);
     const contributors = Array.isArray(members) ? members.length : 0;
 
-    // Fetch up to 300 repos and aggregate stats
     const pages = await Promise.all([
       ghFetch(`/orgs/${ORG}/repos?per_page=100&type=public&page=1`),
       ghFetch(`/orgs/${ORG}/repos?per_page=100&type=public&page=2`).catch(() => []),
@@ -36,7 +36,7 @@ export async function GET() {
       contributors,
       projects,
       commits: commitsProxy,
-      countries: 1, // not available via GitHub API
+      countries: 0,
       stars,
     });
   } catch (e: any) {
