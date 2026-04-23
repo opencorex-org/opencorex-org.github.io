@@ -173,7 +173,7 @@ export default function HomePage() {
               Flagship tracks
             </p>
             <h2 className="mt-5 text-3xl font-medium text-[var(--foreground)] sm:text-4xl">
-              Six focused initiatives, each described with audience, stage, and delivery focus.
+              Platform tracks explained through audience, stage, and delivery priorities.
             </h2>
             <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
               Instead of generic placeholders, the public story now stays close to the actual

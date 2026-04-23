@@ -12,8 +12,8 @@ const Footer = () => {
         <div className="grid gap-10 border-b border-white/12 px-6 py-8 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-10">
           <div className="max-w-2xl">
             <div className="mb-5 flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/15 bg-white/10">
-                <Image src="/logo-white.png" alt="OpenCoreX" width={34} height={34} />
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl">
+                <Image src="/logo-white.png" alt="OpenCoreX" width={100} height={34} />
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">
