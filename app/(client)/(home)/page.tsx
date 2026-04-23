@@ -1,434 +1,323 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import {
-  BookOpen,
-  Code,
-  Globe,
-  Rocket,
+  ArrowRight,
+  BookText,
+  Compass,
+  Layers3,
   ShieldCheck,
   Users,
-  Star,
-  TrendingUp,
-  ArrowRight,
-  Github,
-  MessageCircle,
-  Award,
-  Heart,
-  Target,
-  Code2,
+  Workflow,
 } from "lucide-react";
+
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
-  const [stats, setStats] = useState({
-    contributors: 0,
-    projects: 0,
-    commits: 0,
-    countries: 0,
-  });
+import {
+  deliveryPhases,
+  heroProofPoints,
+  platformPillars,
+  siteLinks,
+  siteProjects,
+  siteSnapshot,
+  workingGroups,
+} from "@/lib/site-content";
 
-  const [recentProjects, setRecentProjects] = useState<
-    { name: string; category: string; stars: number; color: string; url?: string }[]
-  >([]); // no dummy placeholders
+const featuredProjects = siteProjects.slice(0, 4);
+const featuredGroups = workingGroups.slice(0, 3);
 
-  // Animate towards fetched stats
-  const [statsTarget, setStatsTarget] = useState({
-    contributors: 0,
-    projects: 0,
-    commits: 0,
-    countries: 0,
-  });
-
-  useEffect(() => {
-    let raf = 0;
-    const duration = 1000;
-    const start = performance.now();
-    const from = { ...stats };
-
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration);
-      const ease = 1 - Math.pow(1 - t, 3);
-      setStats({
-        contributors: Math.round(
-          from.contributors +
-            (statsTarget.contributors - from.contributors) * ease
-        ),
-        projects: Math.round(
-          from.projects + (statsTarget.projects - from.projects) * ease
-        ),
-        commits: Math.round(
-          from.commits + (statsTarget.commits - from.commits) * ease
-        ),
-        countries: Math.round(
-          from.countries + (statsTarget.countries - from.countries) * ease
-        ),
-      });
-      if (t < 1) raf = requestAnimationFrame(tick);
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [statsTarget]);
-
-  useEffect(() => {
-    async function fetchStats() {
-      try {
-        const res = await fetch("/api/org-stats");
-        if (!res.ok) throw new Error(`Failed: ${res.status}`);
-        const data = await res.json();
-        setStatsTarget({
-          contributors: Number(data.contributors) || 0,
-          projects: Number(data.projects) || 0,
-          commits: Number(data.commits) || 0,
-          countries: Number(data.countries) || 0,
-        });
-      } catch (err) {
-        console.error("Failed to fetch org stats:", err);
-      }
-    }
-    async function fetchProjects() {
-      try {
-        const res = await fetch("/api/projects");
-        if (!res.ok) throw new Error(`Failed: ${res.status}`);
-        const data = await res.json();
-        setRecentProjects(Array.isArray(data) ? data : []);
-      } catch (err) {
-        console.error("Failed to fetch projects:", err);
-      }
-    }
-    fetchStats();
-    fetchProjects();
-  }, []);
-
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-50">
-      {/* Hero Section */}
-      <div className="relative w-screen overflow-hidden py-20">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#8D153A]/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-        </div>
+    <div className="space-y-8 pb-10 lg:space-y-12">
+      <section className="section-grid xl:grid-cols-[1.18fr_0.82fr]">
+        <div className="panel-strong overflow-hidden rounded-[2rem] p-8 sm:p-10 lg:p-12">
+          <div className="accent-rule" />
+          <p className="eyebrow mt-6">
+            <ShieldCheck className="h-4 w-4" />
+            Trusted open resilience software
+          </p>
 
-        <div className="text-center mx-auto bg-linear-to-b from-slate-50 to-white">
-          {/* Logo */}
-          <div className="mb-8">
-            <div className="w-full h-24 mx-auto mb-6 rounded-full flex items-center justify-center  transform hover:scale-105 transition-transform duration-300">
-              <Image
-                src="/logo.png"
-                alt="Platform Logo"
-                width={500}
-                height={500}
-              />
-            </div>
-
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent leading-tight">
-              Welcome to Our Open Source
-              <br />
-              Community
+          <div className="mt-6 max-w-4xl">
+            <h1 className="text-4xl font-medium leading-tight text-[var(--foreground)] sm:text-5xl lg:text-[4.25rem]">
+              A clearer front door for preparedness, mapping, and response products.
             </h1>
-
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
-              Building the future of open-source development through innovation,
-              collaboration, and community-driven solutions that make a real
-              impact.
+            <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--muted)] sm:text-lg">
+              OpenCoreX brings project tracks, contribution routes, and documentation into one
+              durable public experience so visitors can understand the work before they try to
+              change it.
             </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
-            <a
-              href="/projects"
-              className="group flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 bg-[#8D153A]"
-            >
-              <Rocket className="w-5 h-5" />
-              Explore Projects
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-
-            <a
-              href="/contribute"
-              className="group flex items-center gap-2 px-8 py-4 text-[#8D153A] font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-[#8D153A] hover:bg-[#8D153A] hover:text-white bg-white"
-            >
-              <Heart className="w-5 h-5" />
-              Start Contributing
-            </a>
-
-            <a
-              href="https://github.com/opencorex-org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-8 py-4 text-gray-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 bg-white border-2 border-gray-200 hover:border-gray-300"
-            >
-              <Github className="w-5 h-5" />
-              View on GitHub
-            </a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href={siteLinks.projects} className="button-primary px-5 py-4">
+              Explore project tracks
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href={siteLinks.docs} className="button-secondary px-5 py-4">
+              <BookText className="h-4 w-4 text-[var(--brand)]" />
+              Open the handbook
+            </Link>
+            <Link href={siteLinks.contribute} className="button-secondary px-5 py-4">
+              <Users className="h-4 w-4 text-[var(--brand)]" />
+              Start contributing
+            </Link>
           </div>
 
-          {/* Live Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                icon: Users,
-                label: "Contributors",
-                value: stats.contributors,
-                suffix: "+",
-              },
-              {
-                icon: Code2,
-                label: "Projects",
-                value: stats.projects,
-                suffix: "+",
-              },
-              {
-                icon: Code,
-                label: "Commits",
-                value: stats.commits,
-                suffix: "+",
-              },
-              {
-                icon: Globe,
-                label: "Countries",
-                value: stats.countries,
-                suffix: "+",
-              },
-            ].map((stat, idx) => (
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {heroProofPoints.map((item) => (
               <div
-                key={idx}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
+                key={item}
+                className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-strong)] px-4 py-4 text-sm font-medium text-[var(--muted-strong)]"
               >
-                <stat.icon
-                  className="w-8 h-8 mx-auto mb-2"
-                  style={{ color: "#8D153A" }}
-                />
-                <div
-                  className="text-3xl font-bold mb-1"
-                  style={{ color: "#8D153A" }}
-                >
-                  {typeof stat.value === "number"
-                    ? stat.value.toLocaleString()
-                    : stat.value}
-                  {stat.suffix}
-                </div>
-                <div className="text-sm text-gray-600 font-medium">
-                  {stat.label}
-                </div>
+                {item}
               </div>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Core Values Section */}
-      <div className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-md mb-4">
-              <Target className="w-4 h-4 mr-2 text-[#8D153A]" />
-              <span className="text-sm font-semibold text-[#8D153A]">
-                Why Choose Us
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              What Makes Us Different
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We&apos;re more than just a platform-we&apos;re a movement transforming how
-              developers collaborate globally.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Rocket,
-                title: "Innovation First",
-                desc: "Pioneering open-source technologies to tackle real-world challenges with cutting-edge solutions.",
-                color: "#8D153A",
-              },
-              {
-                icon: Users,
-                title: "Global Community",
-                desc: "A diverse, global community of contributors united by passion and purpose.",
-                color: "#2563eb",
-              },
-              {
-                icon: BookOpen,
-                title: "Comprehensive Resources",
-                desc: "Well-structured documentation, guides, and tutorials designed for developers at all skill levels.",
-                color: "#059669",
-              },
-              {
-                icon: Code,
-                title: "True Collaboration",
-                desc: "Build together, learn together. Every contribution is valued and every voice is heard.",
-                color: "#7c3aed",
-              },
-              {
-                icon: ShieldCheck,
-                title: "Quality & Security",
-                desc: "Peer-reviewed code, rigorous testing, and industry best practices ensure reliable software.",
-                color: "#dc2626",
-              },
-              {
-                icon: Globe,
-                title: "Open & Inclusive",
-                desc: "Completely transparent and accessible to everyone, everywhere. No barriers, no boundaries.",
-                color: "#ea580c",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
-              >
-                <div
-                  className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform"
-                  style={{ backgroundColor: `#8D153A15` }}
-                >
-                  <item.icon
-                    className="w-8 h-8"
-                    style={{ color: `#8D153A` }}
-                  />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-800 group-hover:text-[#8D153A] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+        <div className="section-grid">
+          <div className="panel-muted rounded-[2rem] p-6 sm:p-8">
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center">
+                <Image src="/logo.png" alt="OpenCoreX" width={100} height={36} />
               </div>
-            ))}
+              <div>
+                <p className="eyebrow">Platform snapshot</p>
+                <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                  Shared content, reusable sections, and calmer hierarchy across the whole site.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 space-y-4">
+              {siteSnapshot.slice(0, 3).map((item) => (
+                <div key={item.label} className="border-t border-[var(--line)] pt-4 first:border-t-0 first:pt-0">
+                  <p className="text-3xl font-medium text-[var(--foreground)]">{item.value}</p>
+                  <p className="mt-1 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--brand)]">
+                    {item.label}
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-[var(--muted)]">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="panel-brand rounded-[2rem] p-6 text-white sm:p-8">
+            <p className="eyebrow eyebrow-muted">
+              <Compass className="h-4 w-4" />
+              How the hub works
+            </p>
+            <h2 className="mt-5 text-3xl font-medium leading-tight">
+              Visitors can move from discovery into contribution without losing context.
+            </h2>
+            <div className="mt-6 grid gap-3">
+              {[
+                "Projects explain what the platform is building.",
+                "Team shows how work is owned and coordinated.",
+                "Docs and contribute cover the practical next steps.",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-[1.35rem] border border-white/10 bg-white/10 px-4 py-4 text-sm leading-7 text-white/82"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Featured Projects Section */}
-      <div className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-md mb-4">
-              <Star className="w-4 h-4 mr-2 text-[#8D153A]" />
-              <span className="text-sm font-semibold text-[#8D153A]">
-                Popular Projects
-              </span>
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {siteSnapshot.map((signal) => (
+          <div key={signal.label} className="panel rounded-[1.75rem] p-6">
+            <p className="text-4xl font-medium text-[var(--foreground)]">{signal.value}</p>
+            <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">
+              {signal.label}
+            </p>
+            <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{signal.detail}</p>
+          </div>
+        ))}
+      </section>
+
+      <section className="section-grid xl:grid-cols-[0.9fr_1.1fr] xl:items-start">
+        <div className="panel-strong rounded-[2rem] p-8">
+          <p className="eyebrow">
+            <Workflow className="h-4 w-4" />
+            Platform posture
+          </p>
+          <h2 className="mt-5 text-3xl font-medium leading-tight text-[var(--foreground)] sm:text-4xl">
+            Clear public explanations, strong defaults, and less dependency on live external data.
+          </h2>
+          <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
+            The site now behaves more like a product handbook than a placeholder landing page. Each
+            section is there to answer a practical question: what OpenCoreX builds, how the work is
+            organized, and where contributors can help.
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {platformPillars.map((pillar) => (
+            <div key={pillar.title} className="panel rounded-[1.75rem] p-6">
+              <p className="eyebrow">Principle</p>
+              <h3 className="mt-4 text-xl font-medium text-[var(--foreground)]">{pillar.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{pillar.description}</p>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              Trending in Our Community
+          ))}
+        </div>
+      </section>
+
+      <section className="panel-strong rounded-[2rem] p-8 sm:p-10">
+        <div className="flex flex-col gap-4 border-b border-[var(--line)] pb-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="eyebrow">
+              <Layers3 className="h-4 w-4" />
+              Flagship tracks
+            </p>
+            <h2 className="mt-5 text-3xl font-medium text-[var(--foreground)] sm:text-4xl">
+              Platform tracks explained through audience, stage, and delivery priorities.
             </h2>
-            <p className="text-xl text-gray-600">
-              Explore some of our most impactful open-source projects
+            <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
+              Instead of generic placeholders, the public story now stays close to the actual
+              platform lanes and the people those lanes are designed to support.
             </p>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {recentProjects.length > 0
-              ? recentProjects.map((project, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                        <div
-                          className="w-3 h-3 rounded-full"
-                          style={{ backgroundColor: project.color }}
-                        ></div>
-                        <span className="text-sm font-semibold text-gray-600">
-                          {project.category}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 text-yellow-500" />
-                        <span className="font-semibold text-gray-700">
-                          {project.stars}
-                        </span>
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold mb-2 text-gray-800">
-                      {project.name}
-                    </h3>
-                    <a
-                      href={project.url ?? "/projects"}
-                      target={project.url ? "_blank" : undefined}
-                      rel={project.url ? "noopener noreferrer" : undefined}
-                      className="inline-flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all"
-                      style={{ color: project.color }}
-                    >
-                      View Project
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                  </div>
-                ))
-              : [0, 1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 animate-pulse"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-gray-200"></div>
-                        <div className="h-4 w-24 bg-gray-200 rounded"></div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <div className="w-4 h-4 bg-gray-200 rounded"></div>
-                        <div className="h-4 w-8 bg-gray-200 rounded"></div>
-                      </div>
-                    </div>
-                    <div className="h-6 w-3/4 bg-gray-200 rounded mb-4"></div>
-                    <div className="h-4 w-24 bg-gray-200 rounded"></div>
-                  </div>
-                ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <a
-              href="/projects"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#8D153A] font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-[#8D153A]"
-            >
-              View All Projects
-              <ArrowRight className="w-5 h-5" />
-            </a>
-          </div>
+          <Link href={siteLinks.projects} className="button-secondary self-start px-5 py-4">
+            See every track
+            <ArrowRight className="h-4 w-4 text-[var(--brand)]" />
+          </Link>
         </div>
-      </div>
 
-      {/* Call to Action */}
-      <div className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-linear-to-r from-[#8d1539] via-[#8D153A] to-[#b01d4a] rounded-3xl p-12 text-white text-center shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
+        <div className="mt-8 grid gap-5 xl:grid-cols-2">
+          {featuredProjects.map((project) => (
+            <article
+              key={project.slug}
+              className="rounded-[1.75rem] border border-[var(--line)] bg-[var(--surface-strong)] p-6"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <span className="h-3 w-3 rounded-full" style={{ backgroundColor: project.accent }} />
+                  <p className="text-sm font-semibold text-[var(--muted-strong)]">
+                    {project.category}
+                  </p>
+                </div>
+                <span className="rounded-full bg-[var(--brand-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--brand)]">
+                  {project.stage}
+                </span>
+              </div>
 
-            <div className="relative z-10">
-              <Award className="w-16 h-16 mx-auto mb-6" />
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Ready to Make an Impact?
-              </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join our thriving community of developers building the future of
-                open source. Your next contribution could change everything.
+              <h3 className="mt-5 text-2xl font-medium text-[var(--foreground)]">{project.name}</h3>
+              <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{project.summary}</p>
+              <p className="mt-4 text-sm leading-7 text-[var(--muted-strong)]">
+                {project.description}
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="/contribute"
-                  className="flex items-center gap-2 px-8 py-4 text-[#8D153A] bg-white rounded-xl font-semibold hover:scale-105 transition-transform shadow-lg"
-                >
-                  <TrendingUp className="w-5 h-5" />
-                  Start Contributing Today
-                </a>
-
-                <a
-                  href="https://discord.gg/EyfpRmEn9v"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-8 py-4 text-white bg-white/10 backdrop-blur-sm rounded-xl font-semibold hover:bg-white/20 transition-colors border-2 border-white/30"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  Join Discord
-                </a>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.highlights.map((highlight) => (
+                  <span
+                    key={highlight}
+                    className="rounded-full px-3 py-1 text-xs font-semibold"
+                    style={{
+                      backgroundColor: `${project.accent}14`,
+                      color: project.accent,
+                    }}
+                  >
+                    {highlight}
+                  </span>
+                ))}
               </div>
-            </div>
+
+              <Link
+                href={`${siteLinks.projects}#${project.slug}`}
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand)]"
+              >
+                Open project profile
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-grid xl:grid-cols-[0.95fr_1.05fr]">
+        <div className="panel-muted rounded-[2rem] p-8">
+          <p className="eyebrow">
+            <Workflow className="h-4 w-4" />
+            Delivery rhythm
+          </p>
+          <div className="mt-6 space-y-5">
+            {deliveryPhases.map((phase, index) => (
+              <div key={phase.title} className="border-t border-[var(--line)] pt-5 first:border-t-0 first:pt-0">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand)] text-sm font-semibold text-white">
+                    {index + 1}
+                  </div>
+                  <h3 className="text-xl font-medium text-[var(--foreground)]">{phase.title}</h3>
+                </div>
+                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{phase.description}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+
+        <div className="panel-strong rounded-[2rem] p-8">
+          <p className="eyebrow">
+            <Users className="h-4 w-4" />
+            Working groups
+          </p>
+          <h2 className="mt-5 text-3xl font-medium text-[var(--foreground)]">
+            Cross-functional ownership is visible, not hidden inside the codebase.
+          </h2>
+          <div className="mt-6 grid gap-4">
+            {featuredGroups.map((group) => (
+              <div
+                key={group.name}
+                className="rounded-[1.5rem] border border-[var(--line)] bg-[var(--surface-strong)] p-5"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <h3 className="text-lg font-medium text-[var(--foreground)]">{group.name}</h3>
+                  <span className="rounded-full bg-[var(--brand-deep-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brand)]">
+                    {group.category}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{group.summary}</p>
+                <p className="mt-3 text-sm text-[var(--muted-strong)]">
+                  <span className="font-semibold">Looking for:</span> {group.lookingFor}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="panel-brand rounded-[2rem] p-8 text-white sm:p-10">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
+            <p className="eyebrow eyebrow-muted">
+              <ShieldCheck className="h-4 w-4" />
+              Next steps
+            </p>
+            <h2 className="mt-5 text-3xl font-medium leading-tight sm:text-4xl">
+              Move from the high-level story into the practical work without a dead end.
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/82">
+              Browse the tracks, review the docs, or jump into contribution guidance. Every route
+              now points back into the same shared platform narrative.
+            </p>
+          </div>
+
+          <div className="grid gap-3">
+            <Link href={siteLinks.projects} className="button-secondary px-5 py-4 text-[var(--brand)]">
+              Browse project tracks
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href={siteLinks.contribute} className="button-ghost px-5 py-4">
+              Read contribution guidance
+            </Link>
+            <Link href={siteLinks.docs} className="button-ghost px-5 py-4">
+              Open the documentation hub
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

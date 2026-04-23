@@ -1,116 +1,174 @@
-import { Target } from "lucide-react";
+import { ArrowRight, Compass, Layers3, ShieldCheck } from "lucide-react";
 
-export default function Mission() {
-  const primaryColor = "#8D153A";
+import Link from "next/link";
+
+import {
+  aboutPrinciples,
+  operatingModel,
+  roadmapMilestones,
+  siteLinks,
+  siteSnapshot,
+} from "@/lib/site-content";
+
+export default function AboutPage() {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center px-4 py-2 border-[#8D153A] border-2 rounded-full text-sm font-semibold mb-6 text-[#8D153A]">
-          <Target className="w-4 h-4 mr-2" />
-          Our Mission & Vision
-        </div>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Empowering developers worldwide through open-source innovation and
-          collaborative development
-        </p>
-      </div>
+    <div className="space-y-8 pb-10 lg:space-y-12">
+      <section className="section-grid xl:grid-cols-[1.12fr_0.88fr]">
+        <div className="panel-strong rounded-[2rem] p-8 sm:p-10 lg:p-12">
+          <div className="accent-rule" />
+          <p className="eyebrow mt-6">
+            <Compass className="h-4 w-4" />
+            About OpenCoreX
+          </p>
+          <h1 className="mt-5 text-4xl font-medium leading-tight text-[var(--foreground)] sm:text-5xl">
+            OpenCoreX exists to make resilience software clearer, calmer, and easier to sustain.
+          </h1>
+          <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
+            The platform is shaped around public understanding as much as implementation. We treat
+            product structure, contributor onboarding, and documentation quality as part of the
+            product itself, not afterthoughts around it.
+          </p>
 
-      <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-        <div>
-          <h3
-            className="text-2xl font-semibold mb-6"
-            style={{ color: primaryColor }}
-          >
-            What We Believe
-          </h3>
-          <div className="space-y-4">
-            <div className="flex items-start gap-4">
-              <div
-                className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
-                style={{ backgroundColor: primaryColor }}
-              ></div>
-              <p className="text-gray-700">
-                Open source software drives innovation and creates opportunities
-                for everyone
-              </p>
-            </div>
-            <div className="flex items-start gap-4">
-              <div
-                className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
-                style={{ backgroundColor: primaryColor }}
-              ></div>
-              <p className="text-gray-700">
-                Collaboration transcends geographical and cultural boundaries
-              </p>
-            </div>
-            <div className="flex items-start gap-4">
-              <div
-                className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
-                style={{ backgroundColor: primaryColor }}
-              ></div>
-              <p className="text-gray-700">
-                Knowledge sharing accelerates technological advancement
-              </p>
-            </div>
-            <div className="flex items-start gap-4">
-              <div
-                className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
-                style={{ backgroundColor: primaryColor }}
-              ></div>
-              <p className="text-gray-700">
-                Inclusive communities create better solutions
-              </p>
-            </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href={siteLinks.projects} className="button-primary px-5 py-4">
+              Explore the platform
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href={siteLinks.docs} className="button-secondary px-5 py-4">
+              Read the handbook
+            </Link>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-2xl">
-          <h3
-            className="text-2xl font-semibold mb-6"
-            style={{ color: primaryColor }}
-          >
-            Our Impact
-          </h3>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="text-center">
+        <div className="panel-brand rounded-[2rem] p-6 text-white sm:p-8">
+          <p className="eyebrow eyebrow-muted">
+            <ShieldCheck className="h-4 w-4" />
+            What this site reflects
+          </p>
+          <h2 className="mt-5 text-3xl font-medium leading-tight">
+            The public experience should feel as dependable as the tools behind it.
+          </h2>
+          <div className="mt-6 grid gap-4">
+            {siteSnapshot.slice(0, 3).map((item) => (
               <div
-                className="text-3xl font-bold mb-2"
-                style={{ color: primaryColor }}
+                key={item.label}
+                className="rounded-[1.4rem] border border-white/10 bg-white/10 px-4 py-4"
               >
-                1
+                <p className="text-3xl font-medium text-white">{item.value}</p>
+                <p className="mt-1 text-sm font-semibold uppercase tracking-[0.14em] text-white/68">
+                  {item.label}
+                </p>
+                <p className="mt-2 text-sm leading-7 text-white/80">{item.detail}</p>
               </div>
-              <div className="text-gray-600">Developers</div>
-            </div>
-            <div className="text-center">
-              <div
-                className="text-3xl font-bold mb-2"
-                style={{ color: primaryColor }}
-              >
-                3
-              </div>
-              <div className="text-gray-600">Projects</div>
-            </div>
-            <div className="text-center">
-              <div
-                className="text-3xl font-bold mb-2"
-                style={{ color: primaryColor }}
-              >
-                200+
-              </div>
-              <div className="text-gray-600">Downloads</div>
-            </div>
-            <div className="text-center">
-              <div
-                className="text-3xl font-bold mb-2"
-                style={{ color: primaryColor }}
-              >
-                1
-              </div>
-              <div className="text-gray-600">Countries</div>
-            </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="panel rounded-[2rem] p-8 sm:p-10">
+        <div className="max-w-3xl">
+          <p className="eyebrow">Operating beliefs</p>
+          <h2 className="mt-5 text-3xl font-medium text-[var(--foreground)] sm:text-4xl">
+            The platform is designed around local reality, public clarity, and maintainable growth.
+          </h2>
+        </div>
+
+        <div className="mt-8 grid gap-4 lg:grid-cols-2">
+          {aboutPrinciples.map((principle) => (
+            <div key={principle.title} className="rounded-[1.75rem] border border-[var(--line)] bg-[var(--surface-strong)] p-6">
+              <p className="eyebrow">Principle</p>
+              <h3 className="mt-4 text-2xl font-medium text-[var(--foreground)]">
+                {principle.title}
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                {principle.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-grid xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
+        <div className="panel-muted rounded-[2rem] p-8">
+          <p className="eyebrow">
+            <Layers3 className="h-4 w-4" />
+            Operating model
+          </p>
+          <h2 className="mt-5 text-3xl font-medium text-[var(--foreground)]">
+            Strategy, design, delivery, and support are treated as one system.
+          </h2>
+          <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
+            We avoid the pattern where implementation gets all the attention while content,
+            onboarding, and support are left to catch up later.
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {operatingModel.map((item) => (
+            <div key={item.title} className="panel rounded-[1.75rem] p-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">
+                {item.title}
+              </p>
+              <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel-strong rounded-[2rem] p-8 sm:p-10">
+        <div className="max-w-3xl border-b border-[var(--line)] pb-6">
+          <p className="eyebrow">Roadmap context</p>
+          <h2 className="mt-5 text-3xl font-medium text-[var(--foreground)] sm:text-4xl">
+            The public story has evolved from early coordination experiments into a stronger
+            ecosystem hub.
+          </h2>
+        </div>
+
+        <div className="mt-8 grid gap-4 lg:grid-cols-4">
+          {roadmapMilestones.map((milestone) => (
+            <div key={milestone.year} className="rounded-[1.75rem] border border-[var(--line)] bg-[var(--surface-strong)] p-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--brand)]">
+                {milestone.year}
+              </p>
+              <h3 className="mt-3 text-xl font-medium text-[var(--foreground)]">
+                {milestone.title}
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                {milestone.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel-brand rounded-[2rem] p-8 text-white sm:p-10">
+        <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
+          <div>
+            <p className="eyebrow eyebrow-muted">
+              <Compass className="h-4 w-4" />
+              Keep exploring
+            </p>
+            <h2 className="mt-5 text-3xl font-medium leading-tight sm:text-4xl">
+              The clearest way to understand OpenCoreX is to see the platform tracks and the work
+              routes side by side.
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/82">
+              Browse the project catalog for delivery context, then move into the contribution and
+              documentation pages for implementation detail.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            <Link href={siteLinks.projects} className="button-secondary px-5 py-4 text-[var(--brand)]">
+              Project tracks
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href={siteLinks.contribute} className="button-ghost px-5 py-4">
+              Contribution guide
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

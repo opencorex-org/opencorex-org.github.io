@@ -1,26 +1,181 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050505;
+  --foreground: #ffffff;
+  --muted: #c8c8c8;
+  --muted-strong: #f2f2f2;
+  --brand: #8d153a;
+  --brand-deep: #4b0b1e;
+  --brand-soft: rgba(141, 21, 58, 0.18);
+  --brand-deep-soft: rgba(141, 21, 58, 0.12);
+  --accent: #ffffff;
+  --surface: rgba(12, 12, 12, 0.92);
+  --surface-muted: #090909;
+  --surface-strong: #121212;
+  --line: rgba(255, 255, 255, 0.11);
+  --line-strong: rgba(255, 255, 255, 0.22);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Ubuntu", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Ubuntu Mono", "SFMono-Regular", "Cascadia Code", Menlo, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(141, 21, 58, 0.22), transparent 24rem),
+    radial-gradient(circle at left center, rgba(141, 21, 58, 0.1), transparent 28rem),
+    linear-gradient(180deg, #060606 0%, #050505 42%, #0a0a0a 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Ubuntu", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(141, 21, 58, 0.35);
+  color: #ffffff;
+}
+
+.page-shell {
+  position: relative;
+  width: 100%;
+  overflow: clip;
+}
+
+.page-shell::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 8rem),
+    radial-gradient(circle at top right, rgba(141, 21, 58, 0.1), transparent 20rem);
+  content: "";
+}
+
+.page-shell::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 7rem 7rem;
+  content: "";
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent 52%);
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.panel-muted {
+  background: var(--surface-muted);
+  border: 1px solid var(--line);
+}
+
+.panel-strong {
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.panel-brand {
+  background: linear-gradient(145deg, #080808 0%, #12080d 58%, var(--brand-deep) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--brand);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.eyebrow-muted {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.button-primary,
+.button-secondary,
+.button-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.button-primary {
+  background: var(--brand);
+  border: 1px solid var(--brand);
+  color: white;
+}
+
+.button-primary:hover,
+.button-secondary:hover,
+.button-ghost:hover {
+  transform: translateY(-1px);
+}
+
+.button-secondary {
+  background: var(--surface-strong);
+  border: 1px solid var(--line-strong);
+  color: var(--foreground);
+}
+
+.button-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: white;
+}
+
+.data-card {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.accent-rule {
+  height: 4px;
+  width: 4.5rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand), #8d153953);
+}
+
+.section-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .section-grid {
+    gap: 2rem;
+  }
 }

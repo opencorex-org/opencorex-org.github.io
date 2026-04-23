@@ -1,37 +1,18 @@
 import { NextResponse } from "next/server";
 
-export const revalidate = 300; // 5 minutes ISR for static export
+import { siteProjects } from "@/lib/site-content";
 
-const ORG = "opencorex-org";
-const GITHUB_API = "https://api.github.com";
-
-async function ghFetch(path: string) {
-  const headers: Record<string, string> = { Accept: "application/vnd.github+json" };
-  if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-  const res = await fetch(`${GITHUB_API}${path}`, { headers });
-  if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${res.statusText}`);
-  return res.json();
-}
+export const revalidate = 300;
 
 export async function GET() {
-  try {
-    const repos = (await ghFetch(
-      `/orgs/${ORG}/repos?per_page=100&type=public&sort=updated`
-    )) as any[];
-
-    const top = repos
-      .sort((a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0))
-      .slice(0, 6)
-      .map((r) => ({
-        name: r.name,
-        category: r.topics?.[0] ?? "Repository",
-        stars: r.stargazers_count ?? 0,
-        url: r.html_url,
-        color: "#8D153A",
-      }));
-
-    return NextResponse.json(top);
-  } catch (e: any) {
-    return NextResponse.json([], { status: 500 });
-  }
+  return NextResponse.json(
+    siteProjects.slice(0, 6).map((project) => ({
+      name: project.name,
+      category: project.category,
+      stage: project.stage,
+      summary: project.summary,
+      url: `${project.slug}`,
+      color: project.accent,
+    }))
+  );
 }
