@@ -1,7 +1,7 @@
 import SiteFrame from "@/components/common/site-frame";
 
-const ClientLayout = ({ children }: { children: React.ReactNode }) => {
+const DocsLayout = ({ children }: { children: React.ReactNode }) => {
   return <SiteFrame>{children}</SiteFrame>;
 };
 
-export default ClientLayout;
+export default DocsLayout;

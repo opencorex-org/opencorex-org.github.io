@@ -1,147 +1,135 @@
 "use client";
 
-import { Book, Home, Info, Menu, Rocket, Target, Users, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowUpRight, BookText, Home, Info, Layers3, Menu, Users, X } from "lucide-react";
+import { useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { siteLinks } from "@/lib/site-content";
+
+const navItems = [
+  { href: siteLinks.home, label: "Home", icon: Home },
+  { href: siteLinks.projects, label: "Projects", icon: Layers3 },
+  { href: siteLinks.contribute, label: "Contribute", icon: Users },
+  { href: siteLinks.team, label: "Team", icon: Users },
+  { href: siteLinks.about, label: "About", icon: Info },
+  { href: siteLinks.docs, label: "Docs", icon: BookText },
+];
+
+const matchesPath = (pathname: string, href: string) => {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
+
 const Navigation = () => {
   const pathname = usePathname();
-  const navItems = [
-    { id: "/", label: "Home", icon: Home },
-    { id: "/projects", label: "Projects", icon: Rocket },
-    // { id: "/blog", label: "Blog", icon: BookOpen },
-    // { id: "/roadmap", label: "Roadmap", icon: MapPin },
-    { id: "/contribute", label: "Contribute", icon: Users },
-    // { id: "/docs", label: "Docs", icon: Book },
-    // { id: "/team", label: "Team", icon: Target },
-    { id: "/about", label: "About Us", icon: Info },
-  ];
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [activeSection, setActiveSection] = useState(
-    pathname === "/" ? "/" : pathname
-  );
-  const primaryColor = "#8D153A";
-  useEffect(() => {
-    const handleScroll = () => {
-      // Only consider sections that have an id
-      const sections = document.querySelectorAll("section[id]");
-      // default to current pathname to avoid flashing an unrelated key
-      let currentSectionPath = pathname || "/";
-
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top >= 0 && rect.top < window.innerHeight) {
-          // map section ids like "home" -> "/", and "mission" -> "/mission"
-          const id = section.id || "";
-          currentSectionPath = id === "home" || id === "" ? "/" : `/${id}`;
-        }
-      });
-
-      setActiveSection(currentSectionPath);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    // run once to initialize active state
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
-
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <Image
-                src="/logo.png"
-                alt="Platform Logo"
-                width={120}
-                height={40}
-              />
+    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(5,5,5,0.92)] backdrop-blur">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+        <div className="flex min-h-[5rem] items-center justify-between gap-6">
+          <Link href={siteLinks.home} className="flex items-center gap-4">
+            <div className="flex h-16 w-28 items-center justify-center">
+              <Image src="/logo.png" alt="OpenCoreX" width={100} height={100} />
             </div>
-          </div>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <nav className="hidden items-center gap-6 lg:flex">
             {navItems.map((item) => {
-              const Icon = item.icon;
+              const active = matchesPath(pathname, item.href);
+
               return (
-                <Link key={item.id} href={item.id}>
-                  <button
-                    onClick={() => setActiveSection(item.id)}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
-                      activeSection === item.id
-                        ? "text-white"
-                        : "text-gray-700 hover:text-white hover:bg-[#8D153A]"
-                    }`}
-                    style={
-                      activeSection === item.id
-                        ? { backgroundColor: primaryColor }
-                        : {}
-                    }
-                  >
-                    {/* <Icon className="w-4 h-4" /> */}
-                    {item.label}
-                  </button>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`border-b-2 pb-1 text-sm font-medium transition ${
+                    active
+                      ? "border-[var(--brand)] text-[var(--foreground)]"
+                      : "border-transparent text-[var(--muted)] hover:text-[var(--foreground)]"
+                  }`}
+                >
+                  {item.label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
+          <div className="hidden items-center gap-3 lg:flex">
+            <a
+              href={siteLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-secondary px-4 py-3"
             >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+              GitHub
+              <ArrowUpRight className="h-4 w-4 text-[var(--brand)]" />
+            </a>
+            <Link href={siteLinks.contribute} className="button-primary px-4 py-3">
+              Get involved
+            </Link>
           </div>
-        </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+          <button
+            onClick={() => setIsMenuOpen((value) => !value)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--surface-strong)] text-[var(--foreground)] lg:hidden"
+            aria-label="Toggle navigation menu"
+          >
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </div>
+
+      {isMenuOpen ? (
+        <div className="border-t border-[var(--line)] bg-[rgba(5,5,5,0.98)] lg:hidden">
+          <div className="mx-auto max-w-[1440px] px-4 py-5 sm:px-6">
+            <nav className="grid gap-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
+                const active = matchesPath(pathname, item.href);
+
                 return (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      setActiveSection(item.id);
-                      setIsMenuOpen(false);
-                    }}
-                    className={`flex items-center gap-2 w-full px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                      activeSection === item.id
-                        ? "text-white"
-                        : "text-gray-700 hover:text-gray-900"
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`flex items-center justify-between rounded-2xl border px-4 py-3 text-sm font-medium transition ${
+                      active
+                        ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--foreground)]"
+                        : "border-[var(--line)] bg-[var(--surface-strong)] text-[var(--muted-strong)]"
                     }`}
-                    style={
-                      activeSection === item.id
-                        ? { backgroundColor: primaryColor }
-                        : {}
-                    }
                   >
-                    <Icon className="w-5 h-5" />
-                    {item.label}
-                  </button>
+                    <span>{item.label}</span>
+                    <Icon className="h-4 w-4 text-[var(--brand)]" />
+                  </Link>
                 );
               })}
-            </div>
+
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                <a
+                  href={siteLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary px-4 py-3"
+                >
+                  GitHub
+                  <ArrowUpRight className="h-4 w-4 text-[var(--brand)]" />
+                </a>
+                <Link
+                  href={siteLinks.contribute}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="button-primary px-4 py-3"
+                >
+                  Get involved
+                </Link>
+              </div>
+            </nav>
           </div>
-        )}
-      </div>
-    </nav>
+        </div>
+      ) : null}
+    </header>
   );
 };
 
