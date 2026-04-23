@@ -13,17 +13,17 @@ const Footer = () => {
           <div className="max-w-2xl">
             <div className="mb-5 flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl">
-                <Image src="/logo-white.png" alt="OpenCoreX" width={100} height={34} />
+                <Image src="/logo-white.png" alt="OpenCorex" width={100} height={34} />
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">
-                  OpenCoreX
+                  OpenCorex
                 </p>
                 <p className="text-sm text-white/82">Open resilience software, clearly documented</p>
               </div>
             </div>
             <p className="max-w-xl text-sm leading-7 text-white/80">
-              OpenCoreX brings product tracks, contribution guidance, and operational documentation
+              OpenCorex brings product tracks, contribution guidance, and operational documentation
               into one durable public experience so teams can understand the work before they
               change it.
             </p>
@@ -122,7 +122,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/12 px-6 py-4 text-sm text-white/60 sm:px-8 lg:px-10">
-          OpenCoreX site experience, contributor handbook, and project overview. Static content,
+          OpenCorex site experience, contributor handbook, and project overview. Static content,
           consistent design language, and clearer routes into the work.
         </div>
       </div>

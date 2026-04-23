@@ -43,7 +43,7 @@ export default function ProjectsPage() {
             Project tracks
           </p>
           <h1 className="mt-5 text-4xl font-medium leading-tight text-[var(--foreground)] sm:text-5xl">
-            A more detailed, filterable view of what OpenCoreX is actively building.
+            A more detailed, filterable view of what OpenCorex is actively building.
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
             Every track is described with a practical audience, a delivery stage, and the specific

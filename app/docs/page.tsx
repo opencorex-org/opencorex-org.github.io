@@ -49,7 +49,7 @@ export default function DocsPage() {
           A site handbook for shared content, design rules, and release-ready public pages.
         </h1>
         <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
-          This documentation is about how OpenCoreX is structured and maintained. It explains how
+          This documentation is about how OpenCorex is structured and maintained. It explains how
           content flows through the site, where the design language lives, and what to verify
           before shipping an update.
         </p>

@@ -34,7 +34,7 @@ export default function TeamPage() {
             Team and collaboration
           </p>
           <h1 className="mt-5 text-4xl font-medium leading-tight text-[var(--foreground)] sm:text-5xl">
-            OpenCoreX operates through visible working groups instead of a generic staff directory.
+            OpenCorex operates through visible working groups instead of a generic staff directory.
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
             This page focuses on ownership, cadence, and the kind of contributors each lane is
@@ -73,7 +73,7 @@ export default function TeamPage() {
           </div>
 
           <p className="mt-6 text-sm leading-7 text-white/82">
-            The people behind OpenCoreX collaborate across product, engineering, design,
+            The people behind OpenCorex collaborate across product, engineering, design,
             community, and operations with shared context in public.
           </p>
         </div>
