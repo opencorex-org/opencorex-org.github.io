@@ -4,11 +4,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: "OpenCoreX",
-    template: "%s | OpenCoreX",
+    default: "OpenCorex",
+    template: "%s | OpenCorex",
   },
   description:
-    "OpenCoreX is a trusted front door for open resilience software, contributor pathways, and clear public documentation.",
+    "OpenCorex is a trusted front door for open resilience software, contributor pathways, and clear public documentation.",
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",

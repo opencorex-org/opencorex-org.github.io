@@ -40,7 +40,7 @@ export default function HomePage() {
               A clearer front door for preparedness, mapping, and response products.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--muted)] sm:text-lg">
-              OpenCoreX brings project tracks, contribution routes, and documentation into one
+              OpenCorex brings project tracks, contribution routes, and documentation into one
               durable public experience so visitors can understand the work before they try to
               change it.
             </p>
@@ -77,7 +77,7 @@ export default function HomePage() {
           <div className="panel-muted rounded-[2rem] p-6 sm:p-8">
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 items-center justify-center">
-                <Image src="/logo.png" alt="OpenCoreX" width={100} height={36} />
+                <Image src="/logo.png" alt="OpenCorex" width={100} height={36} />
               </div>
               <div>
                 <p className="eyebrow">Platform snapshot</p>
@@ -149,7 +149,7 @@ export default function HomePage() {
           </h2>
           <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
             The site now behaves more like a product handbook than a placeholder landing page. Each
-            section is there to answer a practical question: what OpenCoreX builds, how the work is
+            section is there to answer a practical question: what OpenCorex builds, how the work is
             organized, and where contributors can help.
           </p>
         </div>

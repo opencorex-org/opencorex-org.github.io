@@ -18,10 +18,10 @@ export default function AboutPage() {
           <div className="accent-rule" />
           <p className="eyebrow mt-6">
             <Compass className="h-4 w-4" />
-            About OpenCoreX
+            About OpenCorex
           </p>
           <h1 className="mt-5 text-4xl font-medium leading-tight text-[var(--foreground)] sm:text-5xl">
-            OpenCoreX exists to make resilience software clearer, calmer, and easier to sustain.
+            OpenCorex exists to make resilience software clearer, calmer, and easier to sustain.
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
             The platform is shaped around public understanding as much as implementation. We treat
@@ -149,7 +149,7 @@ export default function AboutPage() {
               Keep exploring
             </p>
             <h2 className="mt-5 text-3xl font-medium leading-tight sm:text-4xl">
-              The clearest way to understand OpenCoreX is to see the platform tracks and the work
+              The clearest way to understand OpenCorex is to see the platform tracks and the work
               routes side by side.
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-white/82">

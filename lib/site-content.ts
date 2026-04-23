@@ -5,10 +5,10 @@ export const siteLinks = {
   team: "/team",
   about: "/about",
   docs: "/docs",
-  github: "https://github.com/opencorex-org",
+  github: "https://github.com/OpenCorex-org",
   discord: "https://discord.gg/EyfpRmEn9v",
-  contact: "mailto:info.opencorex@gmail.com",
-  security: "mailto:info.opencorex@gmail.com",
+  contact: "mailto:info.OpenCorex@gmail.com",
+  security: "mailto:info.OpenCorex@gmail.com",
 };
 
 export const homeSignals = [
@@ -490,7 +490,7 @@ export const footerLinkGroups = [
       { label: "Security", href: siteLinks.security },
       { label: "Documentation", href: siteLinks.docs },
       { label: "Project Tracks", href: siteLinks.projects },
-      { label: "About OpenCoreX", href: siteLinks.about },
+      { label: "About OpenCorex", href: siteLinks.about },
     ],
   },
 ];

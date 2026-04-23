@@ -13,8 +13,8 @@ import {
   siteLinks,
 } from "@/lib/site-content";
 
-const setupCommands = `git clone https://github.com/opencorex-org/opencorex-org.github.io.git
-cd opencorex-org.github.io
+const setupCommands = `git clone https://github.com/OpenCorex-org/OpenCorex-org.github.io.git
+cd OpenCorex-org.github.io
 pnpm install
 pnpm dev`;
 
@@ -32,7 +32,7 @@ export default function ContributePage() {
             Join the work with enough context to ship something useful on your first pass.
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
-            OpenCoreX is easier to contribute to when the public story, the design language, and
+            OpenCorex is easier to contribute to when the public story, the design language, and
             the implementation details stay aligned. This page focuses on the practical working
             rhythm rather than live vanity metrics.
           </p>

@@ -33,7 +33,7 @@ const Navigation = () => {
         <div className="flex min-h-[5rem] items-center justify-between gap-6">
           <Link href={siteLinks.home} className="flex items-center gap-4">
             <div className="flex h-16 w-28 items-center justify-center">
-              <Image src="/logo.png" alt="OpenCoreX" width={100} height={100} />
+              <Image src="/logo.png" alt="OpenCorex" width={100} height={100} />
             </div>
           </Link>
 
