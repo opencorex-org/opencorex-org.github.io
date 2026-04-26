@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import {
   collaborationRoutes,
+  cookieStorageItems,
   docsCollections,
   docsQuickStart,
   qualityStandards,
@@ -15,6 +16,7 @@ const docsNavigation = [
   { id: "overview", title: "Overview" },
   { id: "quick-start", title: "Quick start" },
   ...docsCollections.map((item) => ({ id: item.id, title: item.title })),
+  { id: "cookies-storage", title: "Cookies and storage" },
   { id: "quality-gates", title: "Quality gates" },
   { id: "support-paths", title: "Support paths" },
 ];
@@ -156,6 +158,43 @@ export default function DocsPage() {
               </div>
             </section>
           ))}
+
+          <section id="cookies-storage" className="panel rounded-[2rem] p-8">
+            <p className="eyebrow">
+              <Shield className="h-4 w-4" />
+              Cookies and storage
+            </p>
+            <h2 className="mt-5 text-3xl font-medium text-[var(--foreground)]">
+              OpenCorex stores only the minimum needed to remember cookie consent.
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
+              The site uses a small consent cookie and a matching local storage record so the cookie
+              banner does not reappear on every page load after a visitor makes a choice. We do not
+              use this storage for advertising or behavioral profiling in the current public site.
+            </p>
+
+            <div className="mt-6 grid gap-4">
+              {cookieStorageItems.map((item) => (
+                <div
+                  key={item.name}
+                  className="rounded-[1.5rem] border border-[var(--line)] bg-[var(--surface-strong)] p-5"
+                >
+                  <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <p className="text-lg font-medium text-[var(--foreground)]">{item.name}</p>
+                      <p className="mt-1 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--brand)]">
+                        {item.type}
+                      </p>
+                    </div>
+                    <p className="text-sm text-[var(--muted)]">{item.duration}</p>
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-[var(--muted-strong)]">
+                    {item.purpose}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
 
           <section id="quality-gates" className="panel-strong rounded-[2rem] p-8">
             <p className="eyebrow">

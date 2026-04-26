@@ -1,3 +1,4 @@
+import CookieConsent from "@/components/common/cookie-consent";
 import Footer from "@/components/common/footer";
 import Navigation from "@/components/common/navigation";
 
@@ -10,6 +11,7 @@ const SiteFrame = ({ children }: { children: React.ReactNode }) => {
           {children}
         </div>
       </main>
+      <CookieConsent />
       <Footer />
     </div>
   );
