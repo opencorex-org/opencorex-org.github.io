@@ -450,6 +450,21 @@ export const docsCollections = [
   },
 ];
 
+export const cookieStorageItems = [
+  {
+    name: "opencorex_cookie_consent",
+    type: "Cookie",
+    purpose: "Stores whether the visitor accepted or declined the cookie banner.",
+    duration: "180 days",
+  },
+  {
+    name: "opencorex_cookie_preferences",
+    type: "Local storage",
+    purpose: "Keeps the visitor's most recent cookie consent decision on this device.",
+    duration: "Until cleared by the visitor",
+  },
+];
+
 export const docsQuickStart = [
   {
     title: "Install dependencies",
