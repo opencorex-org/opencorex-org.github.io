@@ -5,7 +5,7 @@ import { marked } from "marked";
 import { PDFDocument } from "pdf-lib";
 import { useMemo, useState } from "react";
 
-const inputClass = "w-full rounded-xl border border-[var(--line)] bg-black/30 px-4 py-3 text-sm text-white outline-none focus:border-white/35";
+const inputClass = "w-full rounded-xl border border-[var(--line)] bg-[var(--surface-muted)] px-4 py-3 text-sm text-[var(--foreground)] outline-none focus:border-[var(--brand)]";
 const buttonClass = "button-primary px-4 py-3";
 
 function download(name: string, content: BlobPart, type = "text/plain") {

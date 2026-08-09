@@ -42,21 +42,14 @@ export default function ToolsPage() {
                 href={tool.href}
                 target={tool.external ? "_blank" : undefined}
                 rel={tool.external ? "noreferrer" : undefined}
-                className="group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-[var(--line)] bg-[var(--surface-strong)] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--line-strong)] hover:shadow-[0_24px_48px_rgba(0,0,0,0.5)]"
-                style={{ boxShadow: "0 12px 32px rgba(0,0,0,0.35)" }}
+                className="group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-[var(--line)] bg-[var(--surface)] p-6 transition-all duration-200 hover:-translate-y-1"
               >
-                {/* Accent glow blob */}
-                <div
-                  className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full opacity-20 blur-3xl transition-opacity duration-300 group-hover:opacity-35"
-                  style={{ background: tool.accent }}
-                />
-
                 {/* Icon */}
                 <div
                   className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl"
                   style={{
-                    background: `${tool.accent}22`,
-                    border: `1px solid ${tool.accent}44`,
+                    background: `${tool.accent}14`,
+                    border: `1px solid ${tool.accent}33`,
                   }}
                 >
                   <Icon className="h-5 w-5" style={{ color: tool.accent }} />
@@ -81,7 +74,7 @@ export default function ToolsPage() {
                 </p>
 
                 {/* CTA */}
-                <div className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-[var(--foreground)] transition-colors duration-150 group-hover:text-white">
+                <div className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-[var(--foreground)] transition-colors duration-150 group-hover:text-[var(--brand)]">
                   Open tool
                   {tool.external ? <ExternalLink className="h-4 w-4" /> : <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1" />}
                 </div>
@@ -89,7 +82,7 @@ export default function ToolsPage() {
                 {/* Bottom accent line */}
                 <div
                   className="absolute bottom-0 left-6 right-6 h-[2px] rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                  style={{ background: `linear-gradient(90deg, ${tool.accent}, transparent)` }}
+                  style={{ backgroundColor: tool.accent }}
                 />
               </Link>
             );

@@ -74,7 +74,7 @@ const CookieConsent = () => {
   }
 
   return (
-    <div className="fixed inset-x-4 bottom-4 z-50 mx-auto w-auto max-w-3xl rounded-[1.75rem] border border-[var(--line-strong)] bg-[rgba(8,8,8,0.96)] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.55)] backdrop-blur">
+    <div className="fixed inset-x-4 bottom-4 z-50 mx-auto w-auto max-w-3xl rounded-[1.75rem] border border-[var(--line-strong)] bg-[var(--surface-strong)] p-5 backdrop-blur">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
           <p className="eyebrow">
@@ -84,7 +84,7 @@ const CookieConsent = () => {
           <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
             We use a small consent cookie and local storage entry to remember your cookie choice on
             this site. You can read the storage details in{" "}
-            <Link href="/docs#cookies-storage" className="font-semibold text-white underline underline-offset-4">
+            <Link href="/docs#cookies-storage" className="font-semibold text-[var(--brand)] underline underline-offset-4">
               Cookies and storage
             </Link>
             .

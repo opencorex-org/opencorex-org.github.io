@@ -1,21 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
-  --muted: #c8c8c8;
-  --muted-strong: #f2f2f2;
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --muted-strong: #1e293b;
   --brand: #8d153a;
-  --brand-deep: #4b0b1e;
-  --brand-soft: rgba(141, 21, 58, 0.18);
-  --brand-deep-soft: rgba(141, 21, 58, 0.12);
-  --accent: #ffffff;
-  --surface: rgba(12, 12, 12, 0.92);
-  --surface-muted: #090909;
-  --surface-strong: #121212;
-  --line: rgba(255, 255, 255, 0.11);
-  --line-strong: rgba(255, 255, 255, 0.22);
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --brand-deep: #5c0e26;
+  --brand-soft: rgba(141, 21, 58, 0.08);
+  --brand-deep-soft: rgba(141, 21, 58, 0.04);
+  --accent: #8d153a;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-strong: #f1f5f9;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
 }
 
 @theme inline {
@@ -27,15 +26,12 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top right, rgba(141, 21, 58, 0.22), transparent 24rem),
-    radial-gradient(circle at left center, rgba(141, 21, 58, 0.1), transparent 28rem),
-    linear-gradient(180deg, #060606 0%, #050505 42%, #0a0a0a 100%);
+  background: var(--background);
   color: var(--foreground);
   font-family: "Ubuntu", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
@@ -45,8 +41,8 @@ a {
 }
 
 ::selection {
-  background: rgba(141, 21, 58, 0.35);
-  color: #ffffff;
+  background: rgba(141, 21, 58, 0.15);
+  color: var(--brand-deep);
 }
 
 .page-shell {
@@ -55,32 +51,9 @@ a {
   overflow: clip;
 }
 
-.page-shell::before {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 8rem),
-    radial-gradient(circle at top right, rgba(141, 21, 58, 0.1), transparent 20rem);
-  content: "";
-}
-
-.page-shell::after {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 7rem 7rem;
-  content: "";
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent 52%);
-}
-
 .panel {
   background: var(--surface);
   border: 1px solid var(--line);
-  box-shadow: var(--shadow);
 }
 
 .panel-muted {
@@ -91,13 +64,12 @@ a {
 .panel-strong {
   background: var(--surface-strong);
   border: 1px solid var(--line);
-  box-shadow: var(--shadow);
 }
 
 .panel-brand {
-  background: linear-gradient(145deg, #080808 0%, #12080d 58%, var(--brand-deep) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+  background: var(--brand);
+  border: 1px solid var(--brand-deep);
+  color: #ffffff;
 }
 
 .eyebrow {
@@ -112,7 +84,7 @@ a {
 }
 
 .eyebrow-muted {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .button-primary,
@@ -126,6 +98,7 @@ a {
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1;
+  cursor: pointer;
   transition:
     transform 160ms ease,
     background-color 160ms ease,
@@ -139,9 +112,9 @@ a {
   color: white;
 }
 
-.button-primary:hover,
-.button-secondary:hover,
-.button-ghost:hover {
+.button-primary:hover {
+  background: var(--brand-deep);
+  border-color: var(--brand-deep);
   transform: translateY(-1px);
 }
 
@@ -151,22 +124,41 @@ a {
   color: var(--foreground);
 }
 
+.button-secondary:hover {
+  background: var(--line);
+  transform: translateY(-1px);
+}
+
 .button-ghost {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: white;
+  border: 1px solid var(--line-strong);
+  color: var(--foreground);
+}
+
+.button-ghost:hover {
+  background: var(--surface-strong);
+  transform: translateY(-1px);
+}
+
+.panel-brand .button-ghost {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+
+.panel-brand .button-ghost:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .data-card {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface-strong);
 }
 
 .accent-rule {
   height: 4px;
   width: 4.5rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--brand), #8d153953);
+  background: var(--brand);
 }
 
 .section-grid {

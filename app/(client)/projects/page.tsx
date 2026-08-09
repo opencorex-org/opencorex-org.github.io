@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, BookText, Search, Target, Workflow } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BookText, Search, Target, Workflow } from "lucide-react";
 import { useDeferredValue, useState } from "react";
 
 import Link from "next/link";
@@ -199,20 +199,34 @@ export default function ProjectsPage() {
               </div>
             </div>
 
-            <div className="mt-6 border-t border-[var(--line)] pt-5">
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
-                Highlights
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {project.highlights.map((highlight) => (
-                  <span
-                    key={highlight}
-                    className="rounded-full border border-[var(--line)] bg-[var(--surface-strong)] px-3 py-1 text-xs font-semibold text-[var(--muted-strong)]"
-                  >
-                    {highlight}
-                  </span>
-                ))}
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--line)] pt-5">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
+                  Highlights
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {project.highlights.map((highlight) => (
+                    <span
+                      key={highlight}
+                      className="rounded-full border border-[var(--line)] bg-[var(--surface-strong)] px-3 py-1 text-xs font-semibold text-[var(--muted-strong)]"
+                    >
+                      {highlight}
+                    </span>
+                  ))}
+                </div>
               </div>
+
+              {project.githubUrl ? (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary px-4 py-2.5 text-xs"
+                >
+                  GitHub Repository
+                  <ArrowUpRight className="h-3.5 w-3.5 text-[var(--brand)]" />
+                </a>
+              ) : null}
             </div>
           </article>
         ))}

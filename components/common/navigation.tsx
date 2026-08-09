@@ -29,7 +29,7 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(5,5,5,0.92)] backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--surface)]/90 backdrop-blur">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
         <div className="flex min-h-[5rem] items-center justify-between gap-6">
           <Link href={siteLinks.home} className="flex items-center gap-4">
@@ -84,7 +84,7 @@ const Navigation = () => {
       </div>
 
       {isMenuOpen ? (
-        <div className="border-t border-[var(--line)] bg-[rgba(5,5,5,0.98)] lg:hidden">
+        <div className="border-t border-[var(--line)] bg-[var(--surface)] lg:hidden">
           <div className="mx-auto max-w-[1440px] px-4 py-5 sm:px-6">
             <nav className="grid gap-2">
               {navItems.map((item) => {

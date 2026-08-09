@@ -12,6 +12,7 @@ export async function GET() {
       stage: project.stage,
       summary: project.summary,
       url: `${project.slug}`,
+      githubUrl: project.githubUrl,
       color: project.accent,
     }))
   );

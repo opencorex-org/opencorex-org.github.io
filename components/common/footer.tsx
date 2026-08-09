@@ -8,21 +8,21 @@ import { footerLinkGroups, siteLinks } from "@/lib/site-content";
 const Footer = () => {
   return (
     <footer className="px-4 pb-8 pt-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-[1440px] overflow-hidden rounded-[2rem] border border-[var(--line)] bg-[#050505] text-white">
-        <div className="grid gap-10 border-b border-white/12 px-6 py-8 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-10">
+      <div className="mx-auto max-w-[1440px] overflow-hidden rounded-[2rem] border border-[var(--line)] bg-[var(--surface-muted)] text-[var(--foreground)]">
+        <div className="grid gap-10 border-b border-[var(--line)] px-6 py-8 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-10">
           <div className="max-w-2xl">
             <div className="mb-5 flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl">
-                <Image src="/logo-white.png" alt="OpenCorex" width={100} height={34} />
+              <div className="flex h-12 w-28 items-center justify-center">
+                <Image src="/logo.png" alt="OpenCorex" width={100} height={34} />
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--brand)]">
                   OpenCorex
                 </p>
-                <p className="text-sm text-white/82">Open resilience software, clearly documented</p>
+                <p className="text-sm text-[var(--muted-strong)]">Open resilience software, clearly documented</p>
               </div>
             </div>
-            <p className="max-w-xl text-sm leading-7 text-white/80">
+            <p className="max-w-xl text-sm leading-7 text-[var(--muted)]">
               OpenCorex brings product tracks, contribution guidance, and operational documentation
               into one durable public experience so teams can understand the work before they
               change it.
@@ -34,24 +34,24 @@ const Footer = () => {
               href={siteLinks.discord}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-start gap-3 rounded-[1.4rem] border border-white/12 bg-white/10 p-4 transition hover:bg-white/15"
+              className="flex items-start gap-3 rounded-[1.4rem] border border-[var(--line)] bg-[var(--surface)] p-4 transition hover:bg-[var(--surface-strong)]"
             >
-              <MessageCircle className="mt-0.5 h-5 w-5 text-white" />
+              <MessageCircle className="mt-0.5 h-5 w-5 text-[var(--brand)]" />
               <div>
-                <p className="text-sm font-semibold text-white">Community chat</p>
-                <p className="mt-1 text-sm leading-6 text-white/72">
+                <p className="text-sm font-semibold text-[var(--foreground)]">Community chat</p>
+                <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
                   Ask questions, coordinate work, and stay close to active contributors.
                 </p>
               </div>
             </a>
             <a
               href={siteLinks.security}
-              className="flex items-start gap-3 rounded-[1.4rem] border border-white/12 bg-white/10 p-4 transition hover:bg-white/15"
+              className="flex items-start gap-3 rounded-[1.4rem] border border-[var(--line)] bg-[var(--surface)] p-4 transition hover:bg-[var(--surface-strong)]"
             >
-              <Shield className="mt-0.5 h-5 w-5 text-white" />
+              <Shield className="mt-0.5 h-5 w-5 text-[var(--brand)]" />
               <div>
-                <p className="text-sm font-semibold text-white">Security route</p>
-                <p className="mt-1 text-sm leading-6 text-white/72">
+                <p className="text-sm font-semibold text-[var(--foreground)]">Security route</p>
+                <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
                   Use a private path for vulnerabilities and sensitive operational concerns.
                 </p>
               </div>
@@ -61,8 +61,8 @@ const Footer = () => {
 
         <div className="grid gap-10 px-6 py-10 sm:px-8 lg:grid-cols-[1.2fr_repeat(3,1fr)] lg:px-10">
           <div className="max-w-md">
-            <div className="accent-rule bg-white/90" />
-            <p className="mt-5 text-sm leading-7 text-white/78">
+            <div className="accent-rule" />
+            <p className="mt-5 text-sm leading-7 text-[var(--muted)]">
               The site is designed as a static-first hub with shared content, calmer hierarchy, and
               no live GitHub data dependency in the public UI.
             </p>
@@ -71,14 +71,14 @@ const Footer = () => {
                 href={siteLinks.contact}
                 className="button-ghost px-4 py-3"
               >
-                <Mail className="h-4 w-4" />
+                <Mail className="h-4 w-4 text-[var(--brand)]" />
                 Contact maintainers
               </a>
               <a
                 href={siteLinks.security}
                 className="button-ghost px-4 py-3"
               >
-                <Shield className="h-4 w-4" />
+                <Shield className="h-4 w-4 text-[var(--brand)]" />
                 Security
               </a>
             </div>
@@ -86,7 +86,7 @@ const Footer = () => {
 
           {footerLinkGroups.map((group) => (
             <div key={group.title}>
-              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-white/55">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--brand)]">
                 {group.title}
               </h3>
               <div className="mt-4 flex flex-col gap-3">
@@ -99,7 +99,7 @@ const Footer = () => {
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="inline-flex items-center gap-2 text-sm text-white/72 transition hover:text-white"
+                      className="inline-flex items-center gap-2 text-sm text-[var(--muted)] transition hover:text-[var(--brand)]"
                     >
                       {link.label}
                       {link.href.startsWith("http") ? (
@@ -110,7 +110,7 @@ const Footer = () => {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="inline-flex items-center gap-2 text-sm text-white/72 transition hover:text-white"
+                      className="inline-flex items-center gap-2 text-sm text-[var(--muted)] transition hover:text-[var(--brand)]"
                     >
                       {link.label}
                     </Link>
@@ -121,7 +121,7 @@ const Footer = () => {
           ))}
         </div>
 
-        <div className="border-t border-white/12 px-6 py-4 text-sm text-white/60 sm:px-8 lg:px-10">
+        <div className="border-t border-[var(--line)] px-6 py-4 text-sm text-[var(--muted)] sm:px-8 lg:px-10">
           OpenCorex site experience, contributor handbook, and project overview. Static content,
           consistent design language, and clearer routes into the work.
         </div>

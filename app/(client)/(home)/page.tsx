@@ -1,5 +1,6 @@
 import {
   ArrowRight,
+  ArrowUpRight,
   BookText,
   Compass,
   Layers3,
@@ -225,13 +226,27 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <Link
-                href={`${siteLinks.projects}#${project.slug}`}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand)]"
-              >
-                Open project profile
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+                <Link
+                  href={`${siteLinks.projects}#${project.slug}`}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand)]"
+                >
+                  Open project profile
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+
+                {project.githubUrl ? (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--muted)] transition hover:text-[var(--brand)]"
+                  >
+                    Repository
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                ) : null}
+              </div>
             </article>
           ))}
         </div>

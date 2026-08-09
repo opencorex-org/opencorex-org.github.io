@@ -391,7 +391,7 @@ const inputCls =
   "w-full rounded-xl border border-[var(--line)] bg-[rgba(255,255,255,0.05)] px-4 py-3 text-sm text-[var(--foreground)] placeholder-[var(--muted)] outline-none transition focus:border-[var(--brand)] focus:ring-2 focus:ring-[rgba(141,21,58,0.22)]";
 
 const selectCls =
-  "w-full rounded-xl border border-[var(--line)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--foreground)] outline-none transition focus:border-[var(--brand)] focus:ring-2 focus:ring-[rgba(141,21,58,0.22)]";
+  "w-full cursor-pointer rounded-xl border border-[var(--line)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--foreground)] outline-none transition focus:border-[var(--brand)] focus:ring-2 focus:ring-[rgba(141,21,58,0.22)]";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -648,7 +648,7 @@ export default function QRCodeGenerator() {
         <Link href="/tools" className="mb-4 inline-flex items-center gap-2 text-sm text-[var(--muted)] transition hover:text-[var(--foreground)]">
           <ArrowLeft className="h-4 w-4" /> Back to Tools
         </Link>
-        <div className="mt-2 flex flex-col gap-4 rounded-[2rem] border border-[var(--line)] bg-gradient-to-br from-[var(--surface-strong)] to-[rgba(141,21,58,.13)] p-6 sm:flex-row sm:items-center sm:p-8">
+        <div className="mt-2 flex flex-col gap-4 rounded-[2rem] border border-[var(--line)] bg-[var(--surface-strong)] p-6 sm:flex-row sm:items-center sm:p-8">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-[rgba(141,21,58,0.3)] bg-[var(--brand-soft)]">
             <QrCode className="h-5 w-5 text-[var(--brand)]" />
           </div>
@@ -672,7 +672,7 @@ export default function QRCodeGenerator() {
               const active = activeType === t.id;
               return (
                 <button key={t.id} onClick={() => setActiveType(t.id)}
-                  className={`group flex min-w-[9.5rem] items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all lg:w-full lg:min-w-0 ${
+                  className={`group flex min-w-[9.5rem] cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all lg:w-full lg:min-w-0 ${
                     active ? "bg-[var(--brand-soft)] text-[var(--foreground)]" : "text-[var(--muted)] hover:bg-[rgba(255,255,255,0.05)] hover:text-[var(--foreground)]"
                   }`}>
                   <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg transition"
@@ -699,7 +699,7 @@ export default function QRCodeGenerator() {
           <div className="flex border-b border-[var(--line)]">
             {(["content", "style", "frame"] as TabId[]).map((tab) => (
               <button key={tab} onClick={() => setActiveTab(tab)}
-                className={`flex-1 px-4 py-3.5 text-sm font-semibold capitalize transition ${
+                className={`flex-1 cursor-pointer px-4 py-3.5 text-sm font-semibold capitalize transition ${
                   activeTab === tab
                     ? "border-b-2 border-[var(--brand)] text-[var(--foreground)]"
                     : "border-b-2 border-transparent text-[var(--muted)] hover:text-[var(--foreground)]"
@@ -744,8 +744,8 @@ export default function QRCodeGenerator() {
                   <div className="grid grid-cols-4 gap-2.5">
                     {THEMES.map((t) => (
                       <button key={t.id} onClick={() => setThemeId(t.id)}
-                        className={`group relative flex flex-col items-center gap-2 rounded-xl border p-3 transition ${
-                          themeId === t.id ? "border-[var(--brand)] bg-[var(--brand-soft)]" : "border-[var(--line)] hover:border-[var(--line-strong)]"
+                        className={`group relative flex cursor-pointer flex-col items-center gap-2 rounded-xl border p-3 transition ${
+                          themeId === t.id ? "border-[var(--brand)] bg-[var(--brand-soft)]" : "border-[var(--line)]"
                         }`}>
                         {/* swatch */}
                         <div className="flex h-9 w-full overflow-hidden rounded-lg border border-[rgba(255,255,255,0.1)]">
@@ -762,7 +762,7 @@ export default function QRCodeGenerator() {
                     ))}
                   </div>
                   <div onClick={() => setThemeId("custom")}
-                    className={`mt-3 w-full rounded-xl border p-3 text-left transition ${themeId === "custom" ? "border-[var(--brand)] bg-[var(--brand-soft)]" : "border-[var(--line)]"}`}>
+                    className={`mt-3 w-full cursor-pointer rounded-xl border p-3 text-left transition ${themeId === "custom" ? "border-[var(--brand)] bg-[var(--brand-soft)]" : "border-[var(--line)]"}`}>
                     <span className="text-sm font-semibold">Custom colors</span>
                     <span className="mt-2 flex items-center gap-3">
                       <input aria-label="QR foreground color" type="color" value={customDark} onChange={(e) => { setCustomDark(e.target.value); setThemeId("custom"); }} className="h-10 w-full cursor-pointer rounded-lg bg-transparent" />
@@ -780,12 +780,12 @@ export default function QRCodeGenerator() {
                   </div>
                   <input type="range" min={200} max={420} step={20} value={qrSize}
                     onChange={(e) => setQrSize(Number(e.target.value))}
-                    className="w-full accent-[var(--brand)]" />
+                    className="w-full cursor-pointer accent-[var(--brand)]" />
                   <div className="mt-1 flex justify-between text-[0.65rem] text-[var(--muted)]">
                     <span>Small</span><span>Medium</span><span>Large</span>
                   </div>
                 </div>
-                <button onClick={resetDesign} className="button-secondary w-full px-4 py-3"><RotateCcw className="h-4 w-4"/> Reset design</button>
+                <button onClick={resetDesign} className="button-secondary w-full cursor-pointer px-4 py-3"><RotateCcw className="h-4 w-4"/> Reset design</button>
 
                 {/* Error correction */}
                 <div>
@@ -807,10 +807,10 @@ export default function QRCodeGenerator() {
                           disabled={lockedByLogo && level !== "H"}
                           className={`flex flex-col items-center gap-1 rounded-xl border p-3 transition ${
                             isActive
-                              ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--foreground)]"
+                              ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--foreground)] cursor-pointer"
                               : lockedByLogo
                                 ? "cursor-not-allowed border-[var(--line)] text-[var(--muted)] opacity-30"
-                                : "border-[var(--line)] text-[var(--muted)] hover:border-[var(--line-strong)]"
+                                : "border-[var(--line)] text-[var(--muted)] cursor-pointer"
                           }`}>
                           <span className="text-base font-bold">{level}</span>
                           <span className="text-[0.6rem]">{desc[level]}</span>
@@ -836,8 +836,8 @@ export default function QRCodeGenerator() {
                   <div className="grid grid-cols-3 gap-3">
                     {FRAMES.map((f) => (
                       <button key={f.id} onClick={() => setFrame(f.id)}
-                        className={`flex flex-col items-center gap-2 rounded-xl border p-3.5 transition ${
-                          frame === f.id ? "border-[var(--brand)] bg-[var(--brand-soft)]" : "border-[var(--line)] hover:border-[var(--line-strong)]"
+                        className={`flex cursor-pointer flex-col items-center gap-2 rounded-xl border p-3.5 transition ${
+                          frame === f.id ? "border-[var(--brand)] bg-[var(--brand-soft)]" : "border-[var(--line)]"
                         }`}>
                         <FrameIcon type={f.id} color={frame === f.id ? "#8D153A" : "#888"} />
                         <span className={`text-xs font-medium ${frame === f.id ? "text-[var(--foreground)]" : "text-[var(--muted)]"}`}>{f.label}</span>
@@ -869,7 +869,7 @@ export default function QRCodeGenerator() {
           <div className="flex items-center justify-between"><p className="text-[0.63rem] font-bold uppercase tracking-widest text-[var(--muted)]">Live preview</p><span className="rounded-full bg-emerald-500/10 px-2 py-1 text-[.6rem] font-bold text-emerald-400">LOCAL ONLY</span></div>
 
           {/* QR image */}
-          <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl bg-white shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+          <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border border-[var(--line)] bg-white">
             {generating && (
               <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm">
                 <RefreshCw className="h-6 w-6 animate-spin text-gray-400" />
@@ -903,7 +903,7 @@ export default function QRCodeGenerator() {
                     <p className="text-[0.65rem] text-[var(--muted)]">Use H error correction</p>
                   </div>
                   <button onClick={() => { setLogo(null); if (logoInputRef.current) logoInputRef.current.value = ""; }}
-                    className="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--line)] text-[var(--muted)] transition hover:border-red-500/50 hover:text-red-400">
+                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg border border-[var(--line)] text-[var(--muted)] transition hover:text-red-400">
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
                 </div>
@@ -914,14 +914,14 @@ export default function QRCodeGenerator() {
                   </div>
                   <input type="range" min={12} max={30} step={1} value={logoSize}
                     onChange={(e) => setLogoSize(Number(e.target.value))}
-                    className="w-full accent-[var(--brand)]" />
+                    className="w-full cursor-pointer accent-[var(--brand)]" />
                 </div>
               </div>
             ) : (
-              <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border border-dashed border-[var(--line)] p-4 text-center transition hover:border-[var(--brand)] hover:bg-[var(--brand-soft)]">
+              <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border border-dashed border-[var(--line)] p-4 text-center transition hover:bg-[var(--brand-soft)]">
                 <ImageIcon className="h-5 w-5 text-[var(--muted)]" />
                 <span className="text-xs text-[var(--muted)]">Click to upload logo</span>
-                <input ref={logoInputRef} type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
+                <input ref={logoInputRef} type="file" accept="image/*" className="hidden cursor-pointer" onChange={handleLogoUpload} />
               </label>
             )}
           </div>
@@ -934,15 +934,15 @@ export default function QRCodeGenerator() {
               </select>
             </Field>
             <button onClick={handleDownload} disabled={!qrDataUrl}
-              className="button-primary flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-40">
+              className="button-primary flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-40">
               <Download className="h-4 w-4" /> Download {exportSize}px PNG
             </button>
             <button onClick={handleCopyImage} disabled={!qrDataUrl}
-              className="button-secondary flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm disabled:opacity-40">
+              className="button-secondary flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-40">
               {copiedImg ? <><Check className="h-4 w-4 text-green-400" /><span className="text-green-400">Image copied!</span></> : <><Square className="h-4 w-4" />Copy image</>}
             </button>
             <button onClick={handleCopyData}
-              className="button-ghost flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm">
+              className="button-ghost flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm">
               {copied ? <><Check className="h-4 w-4 text-green-400" /><span className="text-green-400">Copied!</span></> : <><Copy className="h-4 w-4" />Copy data</>}
             </button>
           </div>
